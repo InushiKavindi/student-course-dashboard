@@ -1,4 +1,8 @@
+"use client";
+
+import { useMemo, useState } from "react";
 import CourseCard from "../components/CourseCard";
+import SearchBar from "../components/SearchBar";
 
 export default function CoursesPage() {
   const sampleCourses = [
@@ -7,14 +11,33 @@ export default function CoursesPage() {
     { id: 3, title: "Databases", desc: "Intro to relational databases.", meta: "10 students" },
   ];
 
+  const [query, setQuery] = useState("");
+
+  const filteredCourses = useMemo(() => {
+    const q = query.toLowerCase().trim();
+    if (!q) return sampleCourses;
+    return sampleCourses.filter((c) =>
+      [c.title, c.desc, c.meta].some((v) => (v || "").toLowerCase().includes(q))
+    );
+  }, [query, sampleCourses]);
+
   return (
     <div>
       <main className="mx-auto max-w-6xl px-6 py-12">
-        <h1 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-50">Courses</h1>
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <h1 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-50">Courses</h1>
+          <SearchBar
+            className="w-full sm:w-80"
+            placeholder="Search courses..."
+            value={query}
+            onChange={setQuery}
+            onFilterClick={() => alert("Filters coming soon")}
+          />
+        </div>
         <p className="mt-2 text-zinc-600 dark:text-zinc-400">Browse available courses below.</p>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {sampleCourses.map((c) => (
+          {filteredCourses.map((c) => (
             <CourseCard key={c.id} id={c.id} title={c.title} desc={c.desc} meta={c.meta} />
           ))}
         </div>
