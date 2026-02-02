@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <div>
@@ -10,10 +12,8 @@ export default function Home() {
         </p>
 
         <div className="mt-8 flex gap-4">
-          <a href="/courses" className="rounded bg-sky-600 px-4 py-2 text-white"> 
-            View Courses
-          </a>
-          <a href="/students" className="rounded border px-4 py-2">View Students</a>
+          <Link href="/courses" className="rounded bg-sky-600 px-4 py-2 text-white">View Courses</Link>
+          <Link href="/students" className="rounded border px-4 py-2">View Students</Link>
         </div>
       </main>
     </div>
