@@ -23,7 +23,7 @@ export default function CoursesPage() {
 
   return (
     <div>
-      <main className="mx-auto max-w-6xl px-6 py-12">
+      <main className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <h1 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-50">Courses</h1>
           <SearchBar
@@ -36,7 +36,7 @@ export default function CoursesPage() {
         </div>
         <p className="mt-2 text-zinc-600 dark:text-zinc-400">Browse available courses below.</p>
 
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {filteredCourses.map((c) => (
             <CourseCard key={c.id} id={c.id} title={c.title} desc={c.desc} meta={c.meta} />
           ))}

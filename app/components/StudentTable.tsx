@@ -16,7 +16,7 @@ export default function StudentTable({ students }: StudentTableProps) {
         <thead>
           <tr className="text-left text-sm text-zinc-600 dark:text-zinc-400">
             <th className="pb-2">Name</th>
-            <th className="pb-2">Email</th>
+            <th className="hidden pb-2 sm:table-cell">Email</th>
             <th className="pb-2">Course</th>
           </tr>
         </thead>
@@ -24,7 +24,7 @@ export default function StudentTable({ students }: StudentTableProps) {
           {students.map((s) => (
             <tr key={s.id} className="border-t bg-white dark:bg-zinc-900">
               <td className="py-3 pr-4">{s.name}</td>
-              <td className="py-3 pr-4 text-sm text-zinc-600 dark:text-zinc-400">{s.email}</td>
+              <td className="hidden py-3 pr-4 text-sm text-zinc-600 dark:text-zinc-400 sm:table-cell">{s.email}</td>
               <td className="py-3 pr-4 text-sm text-zinc-600 dark:text-zinc-400">{s.course}</td>
             </tr>
           ))}
