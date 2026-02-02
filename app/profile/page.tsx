@@ -1,9 +1,6 @@
-import Navbar from "../components/Navbar";
-
 export default function ProfilePage() {
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-black">
-      <Navbar />
+    <div>
       <main className="mx-auto max-w-4xl px-6 py-12">
         <h1 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-50">Profile</h1>
         <p className="mt-2 text-zinc-600 dark:text-zinc-400">User profile and settings placeholder.</p>

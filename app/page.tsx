@@ -1,10 +1,6 @@
-import Link from "next/link";
-import Navbar from "./components/Navbar";
-
 export default function Home() {
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-black">
-      <Navbar />
+    <div>
       <main className="mx-auto max-w-4xl px-6 py-16">
         <h1 className="text-3xl font-semibold text-zinc-900 dark:text-zinc-50">
           Welcome to the Student Course Dashboard
@@ -14,12 +10,10 @@ export default function Home() {
         </p>
 
         <div className="mt-8 flex gap-4">
-          <Link href="/courses" className="rounded bg-sky-600 px-4 py-2 text-white">
+          <a href="/courses" className="rounded bg-sky-600 px-4 py-2 text-white"> 
             View Courses
-          </Link>
-          <Link href="/students" className="rounded border px-4 py-2">
-            View Students
-          </Link>
+          </a>
+          <a href="/students" className="rounded border px-4 py-2">View Students</a>
         </div>
       </main>
     </div>

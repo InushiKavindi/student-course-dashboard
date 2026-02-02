@@ -1,5 +1,3 @@
-import Navbar from "../components/Navbar";
-
 export default function CoursesPage() {
   const sampleCourses = [
     { id: 1, title: "Intro to Programming", desc: "Learn the basics of programming." },
@@ -8,8 +6,7 @@ export default function CoursesPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-black">
-      <Navbar />
+    <div>
       <main className="mx-auto max-w-6xl px-6 py-12">
         <h1 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-50">Courses</h1>
         <p className="mt-2 text-zinc-600 dark:text-zinc-400">Browse available courses below.</p>
