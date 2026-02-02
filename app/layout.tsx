@@ -32,7 +32,7 @@ export default function RootLayout({
       >
         <Navbar />
 
-        <div className="flex w-full flex-1">
+        <div className="flex w-full flex-1 overflow-visible">
           <Sidebar />
 
           <main className="flex-1 px-4 py-8">

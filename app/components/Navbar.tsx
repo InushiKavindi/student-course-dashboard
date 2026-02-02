@@ -7,7 +7,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <header className="sticky top-0 z-40 border-b bg-white/95 backdrop-blur dark:border-zinc-800 dark:bg-[#0b0b0b]/95">
+      <header className="sticky top-0 left-0 right-0 z-50 w-full border-b bg-white/95 backdrop-blur dark:border-zinc-800 dark:bg-[#0b0b0b]/95">
         <div className="mx-auto flex w-full items-center justify-between px-4 py-4 sm:px-6">
           <div className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">Student Dashboard</div>
           <nav className="hidden gap-3 md:flex">
@@ -44,14 +44,14 @@ export default function Navbar() {
       </header>
 
       {open && (
-        <div className="md:hidden border-b bg-gray-100 py-4 text-zinc-900 dark:bg-zinc-900/70 dark:text-zinc-100">
+        <div className="md:hidden sticky top-16 z-40 border-b border-zinc-800 bg-zinc-900 py-4 text-zinc-100">
           <div className="px-4">
-            <div className="mb-3 text-sm uppercase tracking-wide text-zinc-300">Menu</div>
+            <div className="mb-3 text-sm uppercase tracking-wide text-zinc-400">Menu</div>
             <nav className="flex flex-col gap-2">
-              <Link href="/" onClick={() => setOpen(false)} className="rounded bg-white/5 px-4 py-3 hover:bg-white/10">Home</Link>
-              <Link href="/courses" onClick={() => setOpen(false)} className="rounded bg-white/5 px-4 py-3 hover:bg-white/10">Courses</Link>
-              <Link href="/students" onClick={() => setOpen(false)} className="rounded bg-white/5 px-4 py-3 hover:bg-white/10">Students</Link>
-              <Link href="/profile" onClick={() => setOpen(false)} className="rounded bg-white/5 px-4 py-3 hover:bg-white/10">Profile</Link>
+              <Link href="/" onClick={() => setOpen(false)} className="rounded bg-zinc-800 px-4 py-3 hover:bg-zinc-700">Home</Link>
+              <Link href="/courses" onClick={() => setOpen(false)} className="rounded bg-zinc-800 px-4 py-3 hover:bg-zinc-700">Courses</Link>
+              <Link href="/students" onClick={() => setOpen(false)} className="rounded bg-zinc-800 px-4 py-3 hover:bg-zinc-700">Students</Link>
+              <Link href="/profile" onClick={() => setOpen(false)} className="rounded bg-zinc-800 px-4 py-3 hover:bg-zinc-700">Profile</Link>
             </nav>
           </div>
         </div>
