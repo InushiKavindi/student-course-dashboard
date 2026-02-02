@@ -1,0 +1,35 @@
+type Student = {
+  id: number | string;
+  name: string;
+  email?: string;
+  course?: string;
+};
+
+type StudentTableProps = {
+  students: Student[];
+};
+
+export default function StudentTable({ students }: StudentTableProps) {
+  return (
+    <div className="mt-6 overflow-auto">
+      <table className="w-full table-auto border-collapse">
+        <thead>
+          <tr className="text-left text-sm text-zinc-600 dark:text-zinc-400">
+            <th className="pb-2">Name</th>
+            <th className="pb-2">Email</th>
+            <th className="pb-2">Course</th>
+          </tr>
+        </thead>
+        <tbody>
+          {students.map((s) => (
+            <tr key={s.id} className="border-t bg-white dark:bg-zinc-900">
+              <td className="py-3 pr-4">{s.name}</td>
+              <td className="py-3 pr-4 text-sm text-zinc-600 dark:text-zinc-400">{s.email}</td>
+              <td className="py-3 pr-4 text-sm text-zinc-600 dark:text-zinc-400">{s.course}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}

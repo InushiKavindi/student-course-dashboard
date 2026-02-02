@@ -1,8 +1,10 @@
+import CourseCard from "../components/CourseCard";
+
 export default function CoursesPage() {
   const sampleCourses = [
-    { id: 1, title: "Intro to Programming", desc: "Learn the basics of programming." },
-    { id: 2, title: "Data Structures", desc: "Understand common data structures." },
-    { id: 3, title: "Databases", desc: "Intro to relational databases." },
+    { id: 1, title: "Intro to Programming", desc: "Learn the basics of programming.", meta: "12 students" },
+    { id: 2, title: "Data Structures", desc: "Understand common data structures.", meta: "8 students" },
+    { id: 3, title: "Databases", desc: "Intro to relational databases.", meta: "10 students" },
   ];
 
   return (
@@ -13,10 +15,7 @@ export default function CoursesPage() {
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {sampleCourses.map((c) => (
-            <article key={c.id} className="rounded border bg-white p-4 shadow-sm dark:bg-zinc-900">
-              <h2 className="text-lg font-medium text-zinc-900 dark:text-zinc-50">{c.title}</h2>
-              <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">{c.desc}</p>
-            </article>
+            <CourseCard key={c.id} id={c.id} title={c.title} desc={c.desc} meta={c.meta} />
           ))}
         </div>
       </main>
