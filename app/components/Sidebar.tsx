@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Sidebar() {
   return (
-    <aside className="hidden w-64 shrink-0 border-r bg-white dark:bg-[#071018] dark:border-zinc-800 md:block">
+    <aside className="hidden w-64 shrink-0 border-r bg-white dark:bg-[#071018] dark:border-zinc-800 md:block md:sticky md:top-0 md:h-screen md:overflow-y-auto">
       <div className="px-4 py-6">
         <nav className="flex flex-col gap-1">
           <Link href="/" className="block rounded px-3 py-2 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-900">Home</Link>
