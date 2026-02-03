@@ -35,7 +35,6 @@ export default function CoursesPage() {
               placeholder="Search courses..."
               value={query}
               onChange={setQuery}
-              onFilterClick={() => alert("Filters coming soon")}
             />
             <button
               type="button"

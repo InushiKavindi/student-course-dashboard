@@ -14,15 +14,25 @@ export default function StudentsPage() {
   ];
 
   const [query, setQuery] = useState("");
+  const [selectedCourse, setSelectedCourse] = useState("");
   const [isAddOpen, setIsAddOpen] = useState(false);
 
   const filtered = useMemo(() => {
     const q = query.toLowerCase().trim();
     if (!q) return students;
-    return students.filter((s) =>
-      [s.name, s.email || "", s.course || ""].some((v) => v.toLowerCase().includes(q))
-    );
+    return students.filter((s) => (s.name || "").toLowerCase().includes(q));
   }, [query, students]);
+
+  const courseOptions = useMemo(() => {
+    const set = new Set<string>();
+    students.forEach((s) => { if (s.course) set.add(s.course); });
+    return Array.from(set).sort();
+  }, [students]);
+
+  const finalList = useMemo(() => {
+    if (!selectedCourse) return filtered;
+    return filtered.filter((s) => (s.course || "") === selectedCourse);
+  }, [filtered, selectedCourse]);
 
   return (
     <div>
@@ -31,12 +41,25 @@ export default function StudentsPage() {
           <h1 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-50">Students</h1>
           <div className="flex w/full items-center gap-2 sm:w-auto">
             <SearchBar
-              className="w-full sm:w-80"
-              placeholder="Search students..."
+              className="w/full sm:w-80"
+              placeholder="Search by name..."
               value={query}
               onChange={setQuery}
-              onFilterClick={() => alert("Filters coming soon")}
             />
+            <div className="flex items-center gap-2">
+              <label htmlFor="courseFilter" className="sr-only">Filter by course</label>
+              <select
+                id="courseFilter"
+                value={selectedCourse}
+                onChange={(e) => setSelectedCourse(e.target.value)}
+                className="rounded border border-zinc-300 bg-white px-2 py-2 text-sm text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-400 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
+              >
+                <option value="">All courses</option>
+                {courseOptions.map((c) => (
+                  <option key={c} value={c}>{c}</option>
+                ))}
+              </select>
+            </div>
             <button
               type="button"
               onClick={() => setIsAddOpen(true)}
@@ -48,7 +71,7 @@ export default function StudentsPage() {
         </div>
         <p className="mt-2 text-zinc-600 dark:text-zinc-400">List of enrolled students.</p>
 
-        <StudentTable students={filtered} />
+        <StudentTable students={finalList} />
         <Modal open={isAddOpen} onClose={() => setIsAddOpen(false)} title="Add Student">
           <StudentForm onSubmitted={() => setIsAddOpen(false)} />
         </Modal>
