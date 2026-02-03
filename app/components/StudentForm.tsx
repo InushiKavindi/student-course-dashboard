@@ -12,11 +12,46 @@ export default function StudentForm({ onSubmitted }: { onSubmitted?: (data: Stud
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [course, setCourse] = useState("");
+  // Field-level error messages; populated when a field is invalid
+  const [errors, setErrors] = useState<{ name?: string; email?: string; course?: string }>({});
+
+  // Basic email pattern for validation (not exhaustive but user-friendly)
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  // Name must contain only letters and spaces
+  const namePattern = /^[A-Za-z\s]+$/;
+
+  // Validate current form values and return errors by field
+  function validate(values: { name: string; email: string; course: string }) {
+    const next: { name?: string; email?: string; course?: string } = {};
+    if (!values.name.trim()) {
+      next.name = "Name is required";
+    } else if (values.name.trim().length < 2) {
+      next.name = "Name must be at least 2 characters";
+    } else if (!namePattern.test(values.name.trim())) {
+      next.name = "Only letters and spaces are allowed";
+    }
+
+    if (!values.email.trim()) {
+      next.email = "Email is required";
+    } else if (!emailPattern.test(values.email.trim())) {
+      next.email = "Enter a valid email address";
+    }
+
+    if (!values.course.trim()) {
+      next.course = "Course is required";
+    } else if (values.course.trim().length < 3) {
+      next.course = "Course must be at least 3 characters";
+    }
+    return next;
+  }
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const data = { name, email, course };
-    alert(`Student added: ${name || "(no name)"} (${course || "no course"})`);
+    const nextErrors = validate(data);
+    setErrors(nextErrors);
+    if (Object.keys(nextErrors).length > 0) return;
+    alert(`Student added: ${name} (${course})`);
     onSubmitted?.(data);
   }
 
@@ -24,36 +59,62 @@ export default function StudentForm({ onSubmitted }: { onSubmitted?: (data: Stud
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
         <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-200">Name</label>
+        {/* Name: required, min 2 characters, only letters and spaces */}
         <input
           type="text"
           value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="mt-1 w-full rounded border border-zinc-300 bg-white px-3 py-2 text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-400 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50 dark:placeholder-zinc-400"
+          onChange={(e) => {
+            const cleaned = e.target.value.replace(/[^A-Za-z\s]/g, "");
+            setName(cleaned);
+            if (errors.name) setErrors((prev) => ({ ...prev, name: undefined }));
+          }}
+          pattern="[A-Za-z\s]+"
+          aria-invalid={!!errors.name}
+          className={`mt-1 w-full rounded border bg-white px-3 py-2 text-zinc-900 shadow-sm focus:outline-none focus:ring-2 dark:bg-zinc-900 dark:text-zinc-50 dark:placeholder-zinc-400 ${
+            errors.name ? "border-red-500 focus:ring-red-300 dark:border-red-500" : "border-zinc-300 focus:ring-zinc-400 dark:border-zinc-700"
+          }`}
           placeholder="e.g. Alice Johnson"
           required
         />
+        {errors.name && <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.name}</p>}
       </div>
       <div>
+        {/* Email: required, must match basic email format */}
         <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-200">Email</label>
         <input
           type="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="mt-1 w-full rounded border border-zinc-300 bg-white px-3 py-2 text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-400 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50 dark:placeholder-zinc-400"
+          onChange={(e) => {
+            setEmail(e.target.value);
+            if (errors.email) setErrors((prev) => ({ ...prev, email: undefined }));
+          }}
+          aria-invalid={!!errors.email}
+          className={`mt-1 w-full rounded border bg-white px-3 py-2 text-zinc-900 shadow-sm focus:outline-none focus:ring-2 dark:bg-zinc-900 dark:text-zinc-50 dark:placeholder-zinc-400 ${
+            errors.email ? "border-red-500 focus:ring-red-300 dark:border-red-500" : "border-zinc-300 focus:ring-zinc-400 dark:border-zinc-700"
+          }`}
           placeholder="e.g. alice@example.com"
           required
         />
+        {errors.email && <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.email}</p>}
       </div>
       <div>
+        {/* Course: required, min 3 characters */}
         <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-200">Course</label>
         <input
           type="text"
           value={course}
-          onChange={(e) => setCourse(e.target.value)}
-          className="mt-1 w-full rounded border border-zinc-300 bg-white px-3 py-2 text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-400 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50 dark:placeholder-zinc-400"
+          onChange={(e) => {
+            setCourse(e.target.value);
+            if (errors.course) setErrors((prev) => ({ ...prev, course: undefined }));
+          }}
+          aria-invalid={!!errors.course}
+          className={`mt-1 w-full rounded border bg-white px-3 py-2 text-zinc-900 shadow-sm focus:outline-none focus:ring-2 dark:bg-zinc-900 dark:text-zinc-50 dark:placeholder-zinc-400 ${
+            errors.course ? "border-red-500 focus:ring-red-300 dark:border-red-500" : "border-zinc-300 focus:ring-zinc-400 dark:border-zinc-700"
+          }`}
           placeholder="e.g. Data Structures"
           required
         />
+        {errors.course && <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.course}</p>}
       </div>
       <button type="submit" className="inline-flex items-center rounded bg-zinc-900 px-4 py-2 text-sm font-medium text-zinc-100 hover:bg-zinc-800 dark:bg-zinc-700 dark:hover:bg-zinc-600">Add Student</button>
     </form>
