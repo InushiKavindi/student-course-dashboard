@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import StudentTable from "../components/StudentTable";
+import EmptyState from "../components/EmptyState";
 import SearchBar from "../components/SearchBar";
 import Modal from "../components/Modal";
 import StudentForm from "../components/StudentForm";
@@ -75,8 +76,17 @@ export default function StudentsPage() {
           </div>
         </div>
         <p className="mt-2 text-zinc-600 dark:text-zinc-400">List of enrolled students.</p>
-        {/* Responsive table: email column hides on small screens */}
-        <StudentTable students={finalList} />
+        {/* Results: show table or empty state */}
+        {finalList.length > 0 ? (
+          <StudentTable students={finalList} />
+        ) : (
+          <EmptyState
+            title="No students found"
+            description="Try adjusting your search or course filter."
+            actionLabel="Add Student"
+            onAction={() => setIsAddOpen(true)}
+          />
+        )}
         <Modal open={isAddOpen} onClose={() => setIsAddOpen(false)} title="Add Student">
           <StudentForm onSubmitted={() => setIsAddOpen(false)} />
         </Modal>
