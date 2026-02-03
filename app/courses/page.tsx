@@ -11,6 +11,9 @@ export default function CoursesPage() {
     { id: 1, title: "Intro to Programming", code: "CS101", desc: "Learn the basics of programming." },
     { id: 2, title: "Data Structures", code: "CS201", desc: "Understand common data structures." },
     { id: 3, title: "Databases", code: "CS220", desc: "Intro to relational databases." },
+    { id: 4, title: "Algorithms", code: "CS301", desc: "Design and analyze algorithms." },
+    { id: 5, title: "Operating Systems", code: "CS330", desc: "Core concepts of operating systems." },
+    { id: 6, title: "Computer Networks", code: "CS320", desc: "Principles of computer networking." },
   ];
 
   const [query, setQuery] = useState("");
@@ -26,10 +29,10 @@ export default function CoursesPage() {
 
   return (
     <div>
-      <main className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+      <main className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-12">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <h1 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-50">Courses</h1>
-          <div className="flex w/full items-center gap-2 sm:w-auto">
+          <div className="flex w-full items-center gap-2 sm:w-auto">
             <SearchBar
               className="w-full sm:w-80"
               placeholder="Search courses..."
