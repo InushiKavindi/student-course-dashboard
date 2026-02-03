@@ -7,8 +7,8 @@ export default function ProfilePage() {
 
         <section className="mt-6 rounded border bg-white p-6 shadow-sm dark:bg-zinc-900">
           <h2 className="text-lg font-medium text-zinc-900 dark:text-zinc-50">Your Info</h2>
-          <div className="mt-4 text-sm text-zinc-600 dark:text-zinc-400">Name: John Doe</div>
-          <div className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">Email: john@example.com</div>
+          <div className="mt-4 text-sm text-zinc-600 dark:text-zinc-400">Name: Inushi Kavindi</div>
+          <div className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">Email: inushi@example.com</div>
         </section>
       </main>
     </div>

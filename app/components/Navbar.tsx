@@ -12,7 +12,7 @@ export default function Navbar() {
           <div className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">Student Dashboard</div>
           <div className="flex items-center gap-2">
             <Link href="/profile" className="hidden md:flex items-center gap-3 rounded px-3 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-900">
-              <span className="text-sm font-medium text-zinc-900 dark:text-zinc-50">John Doe</span>
+              <span className="text-sm font-medium text-zinc-900 dark:text-zinc-50">Inushi</span>
               <span className="hidden md:inline-grid h-8 w-8 place-items-center rounded-full bg-zinc-200 text-zinc-700 dark:bg-zinc-700 dark:text-zinc-100">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
                   <path d="M12 2.25a5.25 5.25 0 1 0 0 10.5 5.25 5.25 0 0 0 0-10.5Zm-9 17.25a9 9 0 1 1 18 0v.75a.75.75 0 0 1-.75.75H3.75a.75.75 0 0 1-.75-.75v-.75Z" />
