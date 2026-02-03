@@ -8,9 +8,9 @@ import CourseForm from "../components/CourseForm";
 
 export default function CoursesPage() {
   const sampleCourses = [
-    { id: 1, title: "Intro to Programming", desc: "Learn the basics of programming.", meta: "12 students" },
-    { id: 2, title: "Data Structures", desc: "Understand common data structures.", meta: "8 students" },
-    { id: 3, title: "Databases", desc: "Intro to relational databases.", meta: "10 students" },
+    { id: 1, title: "Intro to Programming", code: "CS101", desc: "Learn the basics of programming." },
+    { id: 2, title: "Data Structures", code: "CS201", desc: "Understand common data structures." },
+    { id: 3, title: "Databases", code: "CS220", desc: "Intro to relational databases." },
   ];
 
   const [query, setQuery] = useState("");
@@ -20,7 +20,7 @@ export default function CoursesPage() {
     const q = query.toLowerCase().trim();
     if (!q) return sampleCourses;
     return sampleCourses.filter((c) =>
-      [c.title, c.desc, c.meta].some((v) => (v || "").toLowerCase().includes(q))
+      [c.title, c.code, c.desc].some((v) => (v || "").toLowerCase().includes(q))
     );
   }, [query, sampleCourses]);
 
@@ -50,7 +50,7 @@ export default function CoursesPage() {
 
         <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {filteredCourses.map((c) => (
-            <CourseCard key={c.id} id={c.id} title={c.title} desc={c.desc} meta={c.meta} />
+            <CourseCard key={c.id} id={c.id} title={c.title} code={c.code} desc={c.desc} />
           ))}
         </div>
         <Modal open={isAddOpen} onClose={() => setIsAddOpen(false)} title="Add Course">
