@@ -3,7 +3,8 @@
 import { useMemo, useState } from "react";
 import CourseCard from "../components/CourseCard";
 import SearchBar from "../components/SearchBar";
-import Link from "next/link";
+import Modal from "../components/Modal";
+import CourseForm from "../components/CourseForm";
 
 export default function CoursesPage() {
   const sampleCourses = [
@@ -13,6 +14,7 @@ export default function CoursesPage() {
   ];
 
   const [query, setQuery] = useState("");
+  const [isAddOpen, setIsAddOpen] = useState(false);
 
   const filteredCourses = useMemo(() => {
     const q = query.toLowerCase().trim();
@@ -27,7 +29,7 @@ export default function CoursesPage() {
       <main className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <h1 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-50">Courses</h1>
-          <div className="flex w-full items-center gap-2 sm:w-auto">
+          <div className="flex w/full items-center gap-2 sm:w-auto">
             <SearchBar
               className="w-full sm:w-80"
               placeholder="Search courses..."
@@ -35,9 +37,13 @@ export default function CoursesPage() {
               onChange={setQuery}
               onFilterClick={() => alert("Filters coming soon")}
             />
-            <Link href="/courses/new" className="inline-flex shrink-0 items-center rounded bg-zinc-900 px-3 py-2 text-sm font-medium text-zinc-100 hover:bg-zinc-800 dark:bg-zinc-700 dark:text-zinc-50 dark:hover:bg-zinc-600">
+            <button
+              type="button"
+              onClick={() => setIsAddOpen(true)}
+              className="inline-flex shrink-0 items-center rounded bg-zinc-900 px-3 py-2 text-sm font-medium text-zinc-100 hover:bg-zinc-800 dark:bg-zinc-700 dark:text-zinc-50 dark:hover:bg-zinc-600"
+            >
               Add Course
-            </Link>
+            </button>
           </div>
         </div>
         <p className="mt-2 text-zinc-600 dark:text-zinc-400">Browse available courses below.</p>
@@ -47,6 +53,9 @@ export default function CoursesPage() {
             <CourseCard key={c.id} id={c.id} title={c.title} desc={c.desc} meta={c.meta} />
           ))}
         </div>
+        <Modal open={isAddOpen} onClose={() => setIsAddOpen(false)} title="Add Course">
+          <CourseForm onSubmitted={() => setIsAddOpen(false)} />
+        </Modal>
       </main>
     </div>
   );
