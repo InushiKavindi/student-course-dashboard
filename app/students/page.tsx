@@ -46,7 +46,7 @@ export default function StudentsPage() {
           {/* Controls: wrap to new line on mobile for responsiveness */}
           <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto">
             <SearchBar
-              className="w-full sm:w-80"
+              className="w-full sm:flex-1 sm:min-w-[240px] md:max-w-md"
               placeholder="Search by name..."
               value={query}
               onChange={setQuery}
