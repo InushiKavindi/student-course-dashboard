@@ -2,9 +2,17 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  function isActive(href: string) {
+    if (!pathname) return false;
+    if (href === "/") return pathname === "/";
+    return pathname === href || pathname.startsWith(href + "/");
+  }
+
   return (
     <>
       <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur dark:border-zinc-800 dark:bg-[#0b0b0b]/95 md:ml-64 md:w-[calc(100%-16rem)]">
@@ -40,14 +48,53 @@ export default function Navbar() {
       </header>
 
       {open && (
-        <div className="md:hidden sticky top-16 z-40 border-b border-zinc-800 bg-zinc-900 py-4 text-zinc-100">
+          <div className="md:hidden sticky top-16 z-40 border-b border-[#005c99] bg-[#006BB0] py-4 text-white">
           <div className="px-4">
-            <div className="mb-3 text-sm uppercase tracking-wide text-zinc-400">Menu</div>
+            {/* <div className="mb-3 text-sm uppercase tracking-wide text-zinc-400"></div> */}
             <nav className="flex flex-col gap-2">
-              <Link href="/" onClick={() => setOpen(false)} className="rounded bg-zinc-800 px-4 py-3 hover:bg-zinc-700">Home</Link>
-              <Link href="/courses" onClick={() => setOpen(false)} className="rounded bg-zinc-800 px-4 py-3 hover:bg-zinc-700">Courses</Link>
-              <Link href="/students" onClick={() => setOpen(false)} className="rounded bg-zinc-800 px-4 py-3 hover:bg-zinc-700">Students</Link>
-              <Link href="/profile" onClick={() => setOpen(false)} className="rounded bg-zinc-800 px-4 py-3 hover:bg-zinc-700">Profile</Link>
+              <Link
+                href="/"
+                onClick={() => setOpen(false)}
+                className={`rounded px-4 py-3 transition-colors duration-150 ${
+                  isActive("/") ? "bg-white text-[#0084D1]" : "text-white hover:bg-white hover:text-[#006BB0] focus:bg-white focus:text-[#006BB0]"
+                }`}
+                aria-current={isActive("/") ? "page" : undefined}
+              >
+                Home
+              </Link>
+
+              <Link
+                href="/courses"
+                onClick={() => setOpen(false)}
+                className={`rounded px-4 py-3 transition-colors duration-150 ${
+                  isActive("/courses") ? "bg-white text-[#0084D1]" : "text-white hover:bg-white hover:text-[#006BB0] focus:bg-white focus:text-[#006BB0]"
+                }`}
+                aria-current={isActive("/courses") ? "page" : undefined}
+              >
+                Courses
+              </Link>
+
+              <Link
+                href="/students"
+                onClick={() => setOpen(false)}
+                className={`rounded px-4 py-3 transition-colors duration-150 ${
+                  isActive("/students") ? "bg-white text-[#0084D1]" : "text-white hover:bg-white hover:text-[#006BB0] focus:bg-white focus:text-[#006BB0]"
+                }`}
+                aria-current={isActive("/students") ? "page" : undefined}
+              >
+                Students
+              </Link>
+
+              <Link
+                href="/profile"
+                onClick={() => setOpen(false)}
+                className={`rounded px-4 py-3 transition-colors duration-150 ${
+                  isActive("/profile") ? "bg-white text-[#0084D1]" : "text-white hover:bg-white hover:text-[#006BB0] focus:bg-white focus:text-[#006BB0]"
+                }`}
+                aria-current={isActive("/profile") ? "page" : undefined}
+              >
+                Profile
+              </Link>
             </nav>
           </div>
         </div>
