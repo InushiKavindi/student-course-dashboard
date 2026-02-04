@@ -14,7 +14,7 @@ export default function Sidebar() {
 
   return (
     <aside className="hidden md:block md:fixed md:inset-y-0 md:left-0 w-64 shrink-0 border-r bg-[#0084D1] dark:bg-[#006bb0] dark:border-[#005c99] md:overflow-y-auto">
-      <div className="px-4 py-6 h-full">
+      <div className="px-4 py-20 h-full">
         <nav className="flex flex-col gap-1">
           <Link
             href="/"
