@@ -1,5 +1,9 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
+import Loading from "../components/Loading";
+import ErrorState from "../components/ErrorState";
+
 import { useMemo, useState } from "react";
 import StudentTable from "../components/StudentTable";
 import EmptyState from "../components/EmptyState";
@@ -38,6 +42,20 @@ export default function StudentsPage() {
     return filtered.filter((s) => (s.course || "") === selectedCourse);
   }, [filtered, selectedCourse]);
 
+//   //to test loading and error states
+//   const params = useSearchParams();
+// const demo = params?.get("demo");
+// if (demo === "loading") return <Loading />;
+// if (demo === "error")
+//   return (
+//     <ErrorState
+//       title="Demo error"
+//       description="This is a demo error state for testing."
+//       actionLabel="Retry"
+//       onAction={() => window.location.reload()}
+//     />
+//   );
+
   return (
     <div>
       <main className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-12">
@@ -47,7 +65,7 @@ export default function StudentsPage() {
           {/* Controls: wrap to new line on mobile for responsiveness */}
           <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto">
             <SearchBar
-              className="w-full sm:flex-1 sm:min-w-[240px] md:max-w-md"
+              className="w-full sm:flex-1 sm:min-w-60 md:max-w-md"
               placeholder="Search by name..."
               value={query}
               onChange={setQuery}

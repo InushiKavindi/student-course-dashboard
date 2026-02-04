@@ -19,16 +19,16 @@ export default function ErrorState({ title = "Something went wrong", message, er
   })();
 
   return (
-    <div className={clsx("mt-6", className)}>
-      <div className="rounded-md border border-red-300 bg-white p-6 shadow-sm dark:border-red-600 dark:bg-zinc-900">
-        <div className="flex items-start gap-3">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6 shrink-0 text-red-600 dark:text-red-500" aria-hidden>
+    <div className={clsx("flex items-center justify-center min-h-[60vh] px-4", className)}>
+      <div className="w-full max-w-3xl rounded-md border border-red-300 bg-white p-6 shadow-sm ">
+        <div className="flex flex-col items-center text-center">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-14 w-14 text-red-600 dark:text-red-500" aria-hidden>
             <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" />
           </svg>
-          <div className="flex-1">
-            <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">{title}</h2>
-            {message && <p className="mt-1 text-sm text-zinc-700 dark:text-zinc-300">{message}</p>}
-            <div className="mt-3 flex items-center gap-2">
+          <h2 className="mt-4 text-xl font-semibold text-red-600">{title}</h2>
+          {message && <p className="mt-2 text-sm text-zinc-700 dark:text-zinc-300">{message}</p>}
+          <div className="mt-4 flex flex-col items-center gap-2">
+            <div className="flex items-center gap-2">
               {onRetry && (
                 <button
                   type="button"
@@ -51,7 +51,7 @@ export default function ErrorState({ title = "Something went wrong", message, er
               )}
             </div>
             {showDetails && details && (
-              <pre id="error-details" className="mt-3 max-h-64 overflow-auto rounded bg-zinc-50 p-3 text-xs text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+              <pre id="error-details" className="mt-3 w-full max-h-64 overflow-auto rounded bg-zinc-50 p-3 text-xs text-left text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
                 {details}
               </pre>
             )}
