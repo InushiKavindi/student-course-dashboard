@@ -56,9 +56,10 @@ export default function StudentForm({ onSubmitted }: { onSubmitted?: (data: Stud
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="rounded-md border border-zinc-300 bg-white p-4 shadow-sm">
+      <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-200">Name</label>
+        <label className="block text-sm font-medium text-zinc-700">Name</label>
         {/* Name: required, min 2 characters, only letters and spaces */}
         <input
           type="text"
@@ -70,8 +71,8 @@ export default function StudentForm({ onSubmitted }: { onSubmitted?: (data: Stud
           }}
           pattern="[A-Za-z\s]+"
           aria-invalid={!!errors.name}
-          className={`mt-1 w-full rounded border bg-white px-3 py-2 text-zinc-900 shadow-sm focus:outline-none focus:ring-2 dark:bg-zinc-900 dark:text-zinc-50 dark:placeholder-zinc-400 ${
-            errors.name ? "border-red-500 focus:ring-red-300 dark:border-red-500" : "border-zinc-300 focus:ring-zinc-400 dark:border-zinc-700"
+          className={`mt-1 w-full rounded border px-3 py-2 shadow-sm placeholder:text-zinc-400 hover:border-zinc-600 focus:outline-none focus:ring-1 bg-white text-zinc-900 ${
+            errors.name ? "border-red-500 focus:ring-red-300" : "border-zinc-300 focus:ring-zinc-600"
           }`}
           placeholder="e.g. Alice Johnson"
           required
@@ -80,7 +81,7 @@ export default function StudentForm({ onSubmitted }: { onSubmitted?: (data: Stud
       </div>
       <div>
         {/* Email: required, must match basic email format */}
-        <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-200">Email</label>
+        <label className="block text-sm font-medium text-zinc-700">Email</label>
         <input
           type="email"
           value={email}
@@ -89,8 +90,8 @@ export default function StudentForm({ onSubmitted }: { onSubmitted?: (data: Stud
             if (errors.email) setErrors((prev) => ({ ...prev, email: undefined }));
           }}
           aria-invalid={!!errors.email}
-          className={`mt-1 w-full rounded border bg-white px-3 py-2 text-zinc-900 shadow-sm focus:outline-none focus:ring-2 dark:bg-zinc-900 dark:text-zinc-50 dark:placeholder-zinc-400 ${
-            errors.email ? "border-red-500 focus:ring-red-300 dark:border-red-500" : "border-zinc-300 focus:ring-zinc-400 dark:border-zinc-700"
+          className={`mt-1 w-full rounded border px-3 py-2 shadow-sm placeholder:text-zinc-400 hover:border-zinc-600 focus:outline-none focus:ring-1 bg-white text-zinc-900 ${
+            errors.email ? "border-red-500 focus:ring-red-300" : "border-zinc-300 focus:ring-zinc-600"
           }`}
           placeholder="e.g. alice@example.com"
           required
@@ -99,7 +100,7 @@ export default function StudentForm({ onSubmitted }: { onSubmitted?: (data: Stud
       </div>
       <div>
         {/* Course: required, min 3 characters */}
-        <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-200">Course</label>
+        <label className="block text-sm font-medium text-zinc-700">Course</label>
         <input
           type="text"
           value={course}
@@ -108,15 +109,16 @@ export default function StudentForm({ onSubmitted }: { onSubmitted?: (data: Stud
             if (errors.course) setErrors((prev) => ({ ...prev, course: undefined }));
           }}
           aria-invalid={!!errors.course}
-          className={`mt-1 w-full rounded border bg-white px-3 py-2 text-zinc-900 shadow-sm focus:outline-none focus:ring-2 dark:bg-zinc-900 dark:text-zinc-50 dark:placeholder-zinc-400 ${
-            errors.course ? "border-red-500 focus:ring-red-300 dark:border-red-500" : "border-zinc-300 focus:ring-zinc-400 dark:border-zinc-700"
+          className={`mt-1 w-full rounded border px-3 py-2 shadow-sm placeholder:text-zinc-400 hover:border-zinc-600 focus:outline-none focus:ring-1 bg-white text-zinc-900 ${
+            errors.course ? "border-red-500 focus:ring-red-300" : "border-zinc-300 focus:ring-zinc-600"
           }`}
           placeholder="e.g. Data Structures"
           required
         />
         {errors.course && <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.course}</p>}
       </div>
-      <button type="submit" className="inline-flex items-center rounded bg-zinc-900 px-4 py-2 text-sm font-medium text-zinc-100 hover:bg-zinc-800 dark:bg-zinc-700 dark:hover:bg-zinc-600">Add Student</button>
-    </form>
+      <button type="submit" className="inline-flex items-center rounded bg-[#006BB0] px-4 py-2 text-sm font-medium text-white hover:bg-[#005A9A] focus:outline-none focus:ring-1 focus:ring-zinc-600">Add Student</button>
+      </form>
+    </div>
   );
 }

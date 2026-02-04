@@ -43,7 +43,7 @@ export default function StudentsPage() {
       <main className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-12">
         {/* Header row: wraps on small screens; space-between on larger */}
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <h1 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-50">Students</h1>
+          <h1 className="text-2xl font-semibold text-zinc-900">Students</h1>
           {/* Controls: wrap to new line on mobile for responsiveness */}
           <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto">
             <SearchBar
@@ -58,7 +58,7 @@ export default function StudentsPage() {
                 id="courseFilter"
                 value={selectedCourse}
                 onChange={(e) => setSelectedCourse(e.target.value)}
-                className="w-full rounded border border-zinc-300 bg-white px-2 py-2 text-sm text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-400 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50 sm:w-auto"
+                className="w-full rounded-md border border-zinc-300 bg-white px-2 py-2 text-sm text-zinc-900 hover:bg-zinc-50 focus:outline-none focus:ring-1 focus:ring-zinc-500 sm:w-auto"
               >
                 <option value="">All courses</option>
                 {courseOptions.map((c) => (
@@ -69,7 +69,7 @@ export default function StudentsPage() {
             <button
               type="button"
               onClick={() => setIsAddOpen(true)}
-              className="inline-flex shrink-0 items-center rounded bg-zinc-900 px-3 py-2 text-sm font-medium text-zinc-100 hover:bg-zinc-800 dark:bg-zinc-700 dark:text-zinc-50 dark:hover:bg-zinc-600"
+              className="inline-flex shrink-0 items-center rounded bg-white border border-[#006BB0] px-3 py-2 text-sm font-medium text-[#006BB0] hover:bg-[#f8fbff] focus:outline-none"
             >
               Add Student
             </button>

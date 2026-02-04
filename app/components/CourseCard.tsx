@@ -7,7 +7,7 @@ type CourseCardProps = {
 
 export default function CourseCard({ id, title, code, desc }: CourseCardProps) {
   return (
-    <article className="rounded border bg-white p-4 shadow-sm dark:bg-zinc-900">
+    <article className="rounded border bg-white p-4 shadow-sm">
       <div className="flex items-start justify-between">
         <div>
           <h3 className="text-lg font-medium text-zinc-900 dark:text-zinc-50">{title}</h3>

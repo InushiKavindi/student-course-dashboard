@@ -21,7 +21,7 @@ export default function SearchBar({ placeholder = "Search...", value, onChange, 
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
-          className="w-full rounded-md border border-zinc-300 bg-white py-2 pl-10 pr-3 text-sm outline-none ring-0 placeholder:text-zinc-400 focus:border-zinc-400 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100"
+          className="w-full rounded-md border border-zinc-300 bg-white py-2 pl-10 pr-3 text-sm outline-none ring-0 placeholder:text-zinc-400 focus:border-zinc-400 focus:ring-0 text-zinc-900"
         />
       </div>
       {onFilterClick && (
@@ -29,7 +29,7 @@ export default function SearchBar({ placeholder = "Search...", value, onChange, 
           type="button"
           aria-label="Open filters"
           onClick={onFilterClick}
-          className="inline-flex items-center justify-center rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:bg-zinc-800"
+          className="inline-flex items-center justify-center rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 hover:bg-zinc-100 focus:outline-none focus:ring-1 focus:ring-zinc-600"
         >
           {/* Filter icon */}
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
