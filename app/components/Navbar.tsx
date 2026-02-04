@@ -7,7 +7,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <header className="sticky top-0 left-0 right-0 z-50 w-full border-b bg-white/95 backdrop-blur dark:border-zinc-800 dark:bg-[#0b0b0b]/95">
+      <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur dark:border-zinc-800 dark:bg-[#0b0b0b]/95 md:ml-64 md:w-[calc(100%-16rem)]">
         <div className="mx-auto flex w-full items-center justify-between px-4 py-4 sm:px-6">
           <div className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">Student Dashboard</div>
           <div className="flex items-center gap-2">

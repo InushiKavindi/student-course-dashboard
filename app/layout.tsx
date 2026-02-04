@@ -36,7 +36,7 @@ export default function RootLayout({
         <div className="flex w-full flex-1 overflow-visible">
           <Sidebar />
 
-          <main className="flex-1 px-4 py-8">
+          <main className="flex-1 px-4 py-8 md:ml-64">
             {children}
           </main>
         </div>
