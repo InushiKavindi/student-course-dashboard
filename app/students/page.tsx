@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import Loading from "../components/Loading";
 import ErrorState from "../components/ErrorState";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import StudentTable from "../components/StudentTable";
 import EmptyState from "../components/EmptyState";
 import SearchBar from "../components/SearchBar";
@@ -16,11 +16,21 @@ export default function StudentsPage() {
     { id: 1, name: "Alice Johnson", email: "alice@example.com", course: "Intro to Programming" },
     { id: 2, name: "Bob Smith", email: "bob@example.com", course: "Data Structures" },
     { id: 3, name: "Carol Lee", email: "carol@example.com", course: "Databases" },
+    { id: 4, name: "Daniel Green", email: "daniel.green@example.com", course: "Databases" },
+    { id: 5, name: "Eva Martinez", email: "eva.martinez@example.com", course: "Operating Systems" },
+    { id: 6, name: "Frank Nelson", email: "frank.nelson@example.com", course: "Networks" },
+    { id: 7, name: "Grace Kim", email: "grace.kim@example.com", course: "Algorithms" },
+    { id: 8, name: "Hector Alvarez", email: "hector.alvarez@example.com", course: "Databases" },
+    { id: 9, name: "Ivy Zhao", email: "ivy.zhao@example.com", course: "Intro to Programming" },
+    { id: 10, name: "Jack Turner", email: "jack.turner@example.com", course: "Operating Systems" },
   ];
 
   const [query, setQuery] = useState("");
   const [selectedCourse, setSelectedCourse] = useState("");
   const [isAddOpen, setIsAddOpen] = useState(false);
+  // Pagination
+  const [page, setPage] = useState(1);
+  const pageSize = 5;
 
   // Text search: name-only to keep results predictable on mobile
   const filtered = useMemo(() => {
@@ -41,6 +51,12 @@ export default function StudentsPage() {
     if (!selectedCourse) return filtered;
     return filtered.filter((s) => (s.course || "") === selectedCourse);
   }, [filtered, selectedCourse]);
+
+  // Reset to first page when filters/search change
+  useEffect(() => setPage(1), [query, selectedCourse]);
+
+  const totalPages = Math.max(1, Math.ceil(finalList.length / pageSize));
+  const paginated = finalList.slice((page - 1) * pageSize, page * pageSize);
 
 //   //to test loading and error states
 //   const params = useSearchParams();
@@ -96,7 +112,59 @@ export default function StudentsPage() {
         <p className="mt-2 text-zinc-600 dark:text-zinc-400">List of enrolled students.</p>
         {/* Results: show table or empty state */}
         {finalList.length > 0 ? (
-          <StudentTable students={finalList} />
+          <>
+            <StudentTable students={paginated} />
+
+            {/* Pagination controls */}
+            <div className="mt-4 flex items-center justify-between">
+              <div className="text-sm text-zinc-600">Showing {(page - 1) * pageSize + 1} - {Math.min(page * pageSize, finalList.length)} of {finalList.length}</div>
+              <nav className="flex items-center gap-2" aria-label="Pagination">
+                <button
+                  type="button"
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  disabled={page === 1}
+                  aria-label="Previous page"
+                  className="inline-flex items-center rounded border border-zinc-300 bg-white px-3 py-1 text-sm text-zinc-700 disabled:opacity-50"
+                >
+                  <span className="sr-only">Previous</span>
+                  <svg className="h-4 w-4" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M12 4L6 10L12 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+
+                {/* simple page numbers */}
+                <div className="hidden sm:flex items-center gap-1">
+                  {Array.from({ length: totalPages }).map((_, i) => {
+                    const p = i + 1;
+                    return (
+                      <button
+                        key={p}
+                        type="button"
+                        onClick={() => setPage(p)}
+                        aria-current={page === p ? "page" : undefined}
+                        className={`inline-flex items-center rounded px-3 py-1 text-sm ${page === p ? "bg-[#006BB0] text-white" : "bg-white text-zinc-700 border border-zinc-200"}`}
+                      >
+                        {p}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                  disabled={page === totalPages}
+                  aria-label="Next page"
+                  className="inline-flex items-center rounded border border-zinc-300 bg-white px-3 py-1 text-sm text-zinc-700 disabled:opacity-50"
+                >
+                  <span className="sr-only">Next</span>
+                  <svg className="h-4 w-4" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M8 4L14 10L8 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+              </nav>
+            </div>
+          </>
         ) : (
           <EmptyState
             title="No students found"
