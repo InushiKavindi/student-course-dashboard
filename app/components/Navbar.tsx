@@ -30,15 +30,15 @@ export default function Navbar() {
             <button
               type="button"
               aria-label={open ? "Close menu" : "Open menu"}
-              className="inline-flex items-center rounded px-3 py-2 md:hidden hover:bg-zinc-100"
+              className="inline-flex items-center rounded px-3 py-2 md:hidden hover:bg-zinc-100 text-zinc-900 dark:text-zinc-50"
               onClick={() => setOpen((v) => !v)}
             >
               {open ? (
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style={{ color: '#111827' }} className="h-6 w-6 text-zinc-900 dark:text-zinc-50">
                   <path fillRule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
                 </svg>
               ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style={{ color: '#111827' }} className="h-6 w-6 text-zinc-900 dark:text-zinc-50">
                   <path fillRule="evenodd" d="M3.75 5.25A.75.75 0 0 1 4.5 4.5h15a.75.75 0 0 1 0 1.5h-15a.75.75 0 0 1-.75-.75Zm0 7.5a.75.75 0 0 1 .75-.75h15a.75.75 0 0 1 0 1.5h-15a.75.75 0 0 1-.75-.75Zm.75 6a.75.75 0 0 0 0 1.5h15a.75.75 0 0 0 0-1.5h-15Z" clipRule="evenodd" />
                 </svg>
               )}
