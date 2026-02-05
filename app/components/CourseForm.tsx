@@ -16,6 +16,8 @@ export default function CourseForm({ onSubmitted }: { onSubmitted?: (data: Cours
   const [errors, setErrors] = useState<{ title?: string; code?: string; desc?: string }>({});
 
   const codePattern = /^[A-Z]{2,4}\d{3}$/; // e.g. CS101, MATH201
+  // Title must start with a letter; allow only letters, spaces and & (no numbers)
+  const titlePattern = /^[A-Za-z][A-Za-z &]*$/;
 
   // Validate form values and return errors by field
   function validate(values: { title: string; code: string; desc: string }) {
@@ -24,6 +26,8 @@ export default function CourseForm({ onSubmitted }: { onSubmitted?: (data: Cours
       next.title = "Title is required";
     } else if (values.title.trim().length < 3) {
       next.title = "Title must be at least 3 characters";
+    } else if (!titlePattern.test(values.title.trim())) {
+      next.title = "Title must start with a letter and may include letters, spaces and & (no numbers)";
     }
 
     if (!values.code.trim()) {

@@ -13,16 +13,16 @@ import StudentForm from "../components/StudentForm";
 
 export default function StudentsPage() {
   const students = [
-    { id: 1, name: "Alice Johnson", email: "alice@example.com", course: "Intro to Programming" },
-    { id: 2, name: "Bob Smith", email: "bob@example.com", course: "Data Structures" },
-    { id: 3, name: "Carol Lee", email: "carol@example.com", course: "Databases" },
-    { id: 4, name: "Daniel Green", email: "daniel.green@example.com", course: "Databases" },
-    { id: 5, name: "Eva Martinez", email: "eva.martinez@example.com", course: "Operating Systems" },
-    { id: 6, name: "Frank Nelson", email: "frank.nelson@example.com", course: "Networks" },
-    { id: 7, name: "Grace Kim", email: "grace.kim@example.com", course: "Algorithms" },
-    { id: 8, name: "Hector Alvarez", email: "hector.alvarez@example.com", course: "Databases" },
-    { id: 9, name: "Ivy Zhao", email: "ivy.zhao@example.com", course: "Intro to Programming" },
-    { id: 10, name: "Jack Turner", email: "jack.turner@example.com", course: "Operating Systems" },
+    { id: 1, studentId: "AJ1001", name: "Alice Johnson", email: "alice@example.com", course: "Intro to Programming" },
+    { id: 2, studentId: "BS2002", name: "Bob Smith", email: "bob@example.com", course: "Data Structures" },
+    { id: 3, studentId: "CL3003", name: "Carol Lee", email: "carol@example.com", course: "Databases" },
+    { id: 4, studentId: "DG4004", name: "Daniel Green", email: "daniel.green@example.com", course: "Databases" },
+    { id: 5, studentId: "EM5005", name: "Eva Martinez", email: "eva.martinez@example.com", course: "Operating Systems" },
+    { id: 6, studentId: "FN6006", name: "Frank Nelson", email: "frank.nelson@example.com", course: "Networks" },
+    { id: 7, studentId: "GK7007", name: "Grace Kim", email: "grace.kim@example.com", course: "Algorithms" },
+    { id: 8, studentId: "HA8008", name: "Hector Alvarez", email: "hector.alvarez@example.com", course: "Databases" },
+    { id: 9, studentId: "IZ9009", name: "Ivy Zhao", email: "ivy.zhao@example.com", course: "Intro to Programming" },
+    { id: 10, studentId: "JT1010", name: "Jack Turner", email: "jack.turner@example.com", course: "Operating Systems" },
   ];
 
   const [query, setQuery] = useState("");
@@ -32,11 +32,15 @@ export default function StudentsPage() {
   const [page, setPage] = useState(1);
   const pageSize = 5;
 
-  // Text search: name-only to keep results predictable on mobile
+  // Text search: match name OR studentId
   const filtered = useMemo(() => {
     const q = query.toLowerCase().trim();
     if (!q) return students;
-    return students.filter((s) => (s.name || "").toLowerCase().includes(q));
+    return students.filter((s) => {
+      const nameMatch = (s.name || "").toLowerCase().includes(q);
+      const idMatch = (s.studentId || "").toLowerCase().includes(q);
+      return nameMatch || idMatch;
+    });
   }, [query, students]);
 
   // Build course dropdown options from current list
@@ -82,7 +86,7 @@ export default function StudentsPage() {
           <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto">
             <SearchBar
               className="w-full sm:flex-1 sm:min-w-60 md:max-w-md"
-              placeholder="Search by name..."
+              placeholder="Search by name or ID..."
               value={query}
               onChange={setQuery}
             />
