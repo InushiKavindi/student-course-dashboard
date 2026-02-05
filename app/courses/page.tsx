@@ -6,17 +6,10 @@ import EmptyState from "../components/EmptyState";
 import SearchBar from "../components/SearchBar";
 import Modal from "../components/Modal";
 import CourseForm from "../components/CourseForm";
+import { courses as dummyCourses } from "../data/dummy";
 
 export default function CoursesPage() {
-  const sampleCourses = [
-    { id: 1, title: "Intro to Programming", code: "CS101", desc: "Learn the basics of programming." },
-    { id: 2, title: "Data Structures", code: "CS201", desc: "Understand common data structures." },
-    { id: 3, title: "Databases", code: "CS220", desc: "Intro to relational databases." },
-    { id: 4, title: "Algorithms", code: "CS301", desc: "Design and analyze algorithms." },
-    { id: 5, title: "Operating Systems", code: "CS330", desc: "Core concepts of operating systems." },
-    { id: 6, title: "Computer Networks", code: "CS320", desc: "Principles of computer networking." },
-  ];
-
+  const sampleCourses = dummyCourses;
   const [query, setQuery] = useState("");
   const [isAddOpen, setIsAddOpen] = useState(false);
 

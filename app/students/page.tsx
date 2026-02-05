@@ -10,21 +10,10 @@ import EmptyState from "../components/EmptyState";
 import SearchBar from "../components/SearchBar";
 import Modal from "../components/Modal";
 import StudentForm from "../components/StudentForm";
+import { students as dummyStudents } from "../data/dummy";
 
 export default function StudentsPage() {
-  const students = [
-    { id: 1, studentId: "AJ1001", name: "Alice Johnson", email: "alice@example.com", course: "Intro to Programming" },
-    { id: 2, studentId: "BS2002", name: "Bob Smith", email: "bob@example.com", course: "Data Structures" },
-    { id: 3, studentId: "CL3003", name: "Carol Lee", email: "carol@example.com", course: "Databases" },
-    { id: 4, studentId: "DG4004", name: "Daniel Green", email: "daniel.green@example.com", course: "Databases" },
-    { id: 5, studentId: "EM5005", name: "Eva Martinez", email: "eva.martinez@example.com", course: "Operating Systems" },
-    { id: 6, studentId: "FN6006", name: "Frank Nelson", email: "frank.nelson@example.com", course: "Networks" },
-    { id: 7, studentId: "GK7007", name: "Grace Kim", email: "grace.kim@example.com", course: "Algorithms" },
-    { id: 8, studentId: "HA8008", name: "Hector Alvarez", email: "hector.alvarez@example.com", course: "Databases" },
-    { id: 9, studentId: "IZ9009", name: "Ivy Zhao", email: "ivy.zhao@example.com", course: "Intro to Programming" },
-    { id: 10, studentId: "JT1010", name: "Jack Turner", email: "jack.turner@example.com", course: "Operating Systems" },
-  ];
-
+  const students = dummyStudents;
   const [query, setQuery] = useState("");
   const [selectedCourse, setSelectedCourse] = useState("");
   const [isAddOpen, setIsAddOpen] = useState(false);
